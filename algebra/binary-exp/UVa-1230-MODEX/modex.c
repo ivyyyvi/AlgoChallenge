@@ -3,12 +3,12 @@
 #include <math.h>
 
 /* TODOTODO: wrong answer when enabled */
-#define PRIME_BOOSTER 0
+#define PRIME_BOOSTER 1
 
 
-const char* filename = "input/input.txt";
+const char* filename = "input/big_mod_input.txt";
 
-/*Only list prime numbers smaller then sqrt(46340) */
+/*Only list prime numbers smaller then sqrt(46340)=215.xxx */
 const int PRIME_NUMBERS[] = {
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
     101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199,
@@ -22,13 +22,21 @@ const int PRIME_NUMBERS[] = {
 */
 int isPrime (int m)
 {
-    m = sqrt(m);
     int i = 0;
+    int sqrt_m = sqrt(m);
+    int prime = 0;
 
     int table_size = sizeof(PRIME_NUMBERS)/ sizeof(PRIME_NUMBERS[0]);
     for (i = 0; i < table_size; i++) {
 
-        if (m == PRIME_NUMBERS[i]) return 1;
+        prime = PRIME_NUMBERS[i];
+
+        if (prime > sqrt_m) break;
+
+        if (m == prime) {
+            /*  m matches one of the prime numbers in table*/
+            return 1;
+        }
         
         if ((m % PRIME_NUMBERS[i]) == 0) {
             /*  if m is not the prime numbers itself 
@@ -52,7 +60,7 @@ long long xToyModM_v2 (long long x, int y, int m)
     x^n (mod m) => x^(n mod(m-1)) (mod m)
     */    
     if (PRIME_BOOSTER) {
-        if (isPrime(m)) {
+        if (isPrime (m)) {
             /*printf("m %d is a prime number.\n", m);*/
             y = y % (m-1);
             /*printf("y becomes %d.\n", y);*/
