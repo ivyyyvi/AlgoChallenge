@@ -11,7 +11,8 @@
                 "${file}",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-D INPUT_FROM_FILE"
+                "-D INPUT_FROM_FILE",
+                //"-D INPUT_BEGIN_WITH_NUM_DATASETS"
             ],
             "options": {
                 "cwd": "${fileDirname}"
