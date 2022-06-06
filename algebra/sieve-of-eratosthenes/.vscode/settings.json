@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "cstdio": "c",
+        "modex_from_file_large_input": "c",
+        "math.h": "c"
+    }
+}
